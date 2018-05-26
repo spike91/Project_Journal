@@ -33,3 +33,38 @@
         display: none;
     }
 }
+
+.center {
+    text-align: center;
+}
+
+.padding {
+    margin-top: 8px;
+}
+
+.footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1030;
+    background: #222222;
+    color: #fff;
+    font-size: 60px;
+    text-align: center;
+    padding: 10px;
+}
+
+.background {
+    padding-top: 100px;
+    background-image: url(/images/white.png);
+}
+
+.content {
+    background-size: cover;
+    background-color: white;
+    width: auto;
+    height: auto;
+    padding-bottom: 30px;
+    border-radius: 10px;
+}

@@ -29,6 +29,21 @@ namespace Project.App.Controllers
             return View();
         }
 
+        public IActionResult AddCategory()
+        {
+            return View();
+        }
+
+        public IActionResult AddJournal()
+        {
+            return View();
+        }
+
+        public IActionResult UpdateJournal()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
