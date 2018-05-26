@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Project.Entities.User>
+@{
+    ViewData["Title"] = "User's list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-action="Create">Add user</a>
+
+<table class="table">
+    <tr><th>Email</th><th></th></tr>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>
+                <form asp-controller="Users" asp-action="Delete" asp-route-id="@user.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Change</a>
+                    <a class="btn btn-sm btn-primary" asp-controller="Users" asp-action="ChangePassword" asp-route-id="@user.Id">Change password</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

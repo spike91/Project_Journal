@@ -28,7 +28,10 @@ namespace Project.App
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(opts =>
+            {
+                opts.User.RequireUniqueEmail = true;
+            })
                 .AddEntityFrameworkStores<Context>();
 
             services.AddMvc();
