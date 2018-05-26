@@ -138,10 +138,11 @@ namespace Project.App.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                    ModelState.AddModelError(string.Empty, "User not found.");
                 }
             }
             return View(model);
         }
+               
     }
 }
