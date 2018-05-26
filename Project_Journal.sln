@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Entities", "Project
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.DataBase", "Project.DataBase\Project.DataBase.csproj", "{4039E59A-CD37-49D6-BA5D-806732F33730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.App", "Project.App\Project.App.csproj", "{39DCBBCC-EA2E-4054-AF43-F933E779AC50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.App", "Project.App\Project.App.csproj", "{39DCBBCC-EA2E-4054-AF43-F933E779AC50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
