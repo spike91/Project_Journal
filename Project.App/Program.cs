@@ -15,18 +15,20 @@ namespace Project.App
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
 
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                Task t;
                 try
-                {
+                {                    
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    await RoleInitializer.InitializeAsync(userManager, rolesManager);
+                    t = RoleInitializer.InitializeAsync(userManager, rolesManager);
+                    t.Wait();
                 }
                 catch (Exception ex)
                 {
