@@ -11,14 +11,14 @@ using System;
 namespace Project.DataBase.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20180525130409_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180527183839_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -143,9 +143,8 @@ namespace Project.DataBase.Migrations
 
             modelBuilder.Entity("Project.Entities.Comment", b =>
                 {
-                    b.Property<string>("Id");
-
-                    b.Property<int>("CommentID");
+                    b.Property<int>("CommentID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("Date");
 
@@ -153,7 +152,11 @@ namespace Project.DataBase.Migrations
 
                     b.Property<string>("Title");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserId");
+
+                    b.HasKey("CommentID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -464,8 +467,7 @@ namespace Project.DataBase.Migrations
                 {
                     b.HasOne("Project.Entities.User", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Project.Entities.Concretejournal", b =>
@@ -481,7 +483,6 @@ namespace Project.DataBase.Migrations
                     b.HasOne("Project.Entities.Comment", "Comment")
                         .WithMany("ConcretejournalComments")
                         .HasForeignKey("CommentID")
-                        .HasPrincipalKey("CommentID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Project.Entities.Concretejournal", "Concretejournal")

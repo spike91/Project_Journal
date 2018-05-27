@@ -11,7 +11,7 @@ namespace Project.Entities
         public string Description { get; set; }
         public DateTime Date { get; set; }
 
-        public string Id { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
 
         public ICollection<ConcretejournalComment> ConcretejournalComments { get; set; }
