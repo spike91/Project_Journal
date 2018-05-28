@@ -20,7 +20,7 @@ namespace Project.App.Controllers
         Context db;
         public HomeController(Context context)
         {
-            db = context;
+            this.db = context;
         }
 
         public IActionResult Index()
