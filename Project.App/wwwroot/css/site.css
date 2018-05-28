@@ -78,10 +78,20 @@
 
 /* Our resposive dropdown */
 
+ul#nav ul.snug {
+    width: auto;
+}
+
+    ul#nav ul.snug li a {
+        display: inline;
+        padding-right: 6px;
+        width: auto;
+    }
+
 ul.dropdown-menu {
   border-radius: 0;
   background: #080808;
-  width: 100%;
+  width: auto;
   margin: 0;
 }
 ul.dropdown-menu li a:link,
