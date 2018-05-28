@@ -7,12 +7,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Project.App.Models;
+using Project.App.ViewModels;
+using Project.DataBase;
+using Project.Entities;
 
 namespace Project.App.Controllers
 {
     public class HomeController : Controller
     {
+
+        Context db;
+
+        public HomeController(Context context)
+        {
+            this.db = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -63,5 +75,7 @@ namespace Project.App.Controllers
 
             return LocalRedirect(returnUrl);
         }
+
+        
     }
 }
