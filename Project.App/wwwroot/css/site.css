@@ -68,3 +68,78 @@
     padding-bottom: 30px;
     border-radius: 10px;
 }
+
+/* Navbar */
+
+#primary-navbar {
+  margin-bottom: 0;
+}
+/* we overwrite the default navbar style from Bootstrap */
+
+/* Our resposive dropdown */
+
+ul#nav ul.snug {
+    width: auto;
+}
+
+    ul#nav ul.snug li a {
+        display: inline;
+        padding-right: 6px;
+    }
+
+ul.dropdown-menu {
+  border-radius: 0;
+  background: #080808;
+  width: auto;
+  margin: 0;
+}
+ul.dropdown-menu li a:link,
+ul.dropdown-menu li a:visited {
+  color: #ffffff;
+  padding: 5px 15px;
+}
+ul.dropdown-menu li a:hover,
+ul.dropdown-menu li a:focus {
+  color: #666666;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #ccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #fff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}

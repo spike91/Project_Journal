@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project.App.ViewModels;
+using Project.DataBase;
 using Project.Entities;
 
 namespace Project.App.Controllers
@@ -20,6 +21,7 @@ namespace Project.App.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         [HttpGet]
         public IActionResult Register()
         {

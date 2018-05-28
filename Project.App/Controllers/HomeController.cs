@@ -17,12 +17,11 @@ namespace Project.App.Controllers
 {
     public class HomeController : Controller
     {
-
-        Context db;
+        public static Context db;
 
         public HomeController(Context context)
         {
-            this.db = context;
+            db = context;
         }
 
         public IActionResult Index()
@@ -76,6 +75,5 @@ namespace Project.App.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        
     }
 }
