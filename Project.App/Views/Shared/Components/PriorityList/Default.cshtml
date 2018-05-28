@@ -10,17 +10,17 @@
     if (category.SubcategoryCategories.Count != 0)
     {
         <li class="dropdown-submenu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@category.CategoryName</a>
+            <a asp-controller="Journal" asp-action="Index" class="dropdown-toggle" data-toggle="dropdown">@category.CategoryName</a>
             <ul class="dropdown-menu">
                 @foreach (SubcategoryCategory sub in category.SubcategoryCategories)
                 {
-                    <li><a href="#">@sub.Subcategory.Name</a></li>
+                    <li><a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-subCategory="@sub.Subcategory.SubcategoryID">@sub.Subcategory.Name</a></li>
                 }
             </ul>
         </li>
     }
     else
     {
-        <li><a href="#">@category.CategoryName</a></li>
+        <li><a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-category="@category.CategoryID">@category.CategoryName</a></li>
     }
 }
