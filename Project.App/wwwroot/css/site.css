@@ -85,7 +85,6 @@ ul#nav ul.snug {
     ul#nav ul.snug li a {
         display: inline;
         padding-right: 6px;
-        width: auto;
     }
 
 ul.dropdown-menu {

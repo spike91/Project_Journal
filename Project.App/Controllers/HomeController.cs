@@ -17,18 +17,16 @@ namespace Project.App.Controllers
 {
     public class HomeController : Controller
     {
-
-        Context db;
+        public static Context db;
 
         public HomeController(Context context)
         {
-            this.db = context;
+            db = context;
         }
 
         public IActionResult Index()
         {
-            List<Category> list = db.Categories.Include(c => c.SubcategoryCategories).ThenInclude(sc => sc.Subcategory).ToList();
-            return View(new MenuViewModel { Categories =  list});
+            return View();
         }
 
         public IActionResult About()
@@ -77,6 +75,5 @@ namespace Project.App.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        
     }
 }
