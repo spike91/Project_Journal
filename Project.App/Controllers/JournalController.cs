@@ -20,7 +20,7 @@ namespace Project.App.Controllers
             this.db = context;
         }
 
-        public async Task<IActionResult> Index(int? category, int? company, string title, int page = 1,
+        public async Task<IActionResult> Index(int? category, int? company, string name, int page = 1,
             SortState sortOrder = SortState.TitleAsc)
         {        
             int pageSize = 5;
@@ -36,9 +36,9 @@ namespace Project.App.Controllers
             {
                 journals = journals.Where(p => p.JournalCategories.Where(x => x.CategoryID == category).Count() >= 1);
             }
-            if (!String.IsNullOrEmpty(title))
+            if (!String.IsNullOrEmpty(name))
             {
-                journals = journals.Where(p => p.Title.Contains(title));
+                journals = journals.Where(p => p.Title.Contains(name));
             }
 
             // сортировка
@@ -79,7 +79,7 @@ namespace Project.App.Controllers
             {
                 PageViewModel = new PageViewModel(count, page, pageSize),
                 SortViewModel = new SortViewModel(sortOrder),
-                FilterViewModel = new FilterViewModel(db.Categories.ToList(), category, db.Publishingcompanies.ToList(), company, title),
+                FilterViewModel = new FilterViewModel(db.Categories.ToList(), category, db.Publishingcompanies.ToList(), company, name),
                 Journals = items
             };
 
