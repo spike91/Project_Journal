@@ -84,7 +84,7 @@ namespace Project.DataBase
             modelBuilder.Entity<Comment>()
             .HasOne(c => c.User)
             .WithMany(u => u.Comments)
-            .HasForeignKey(c => c.Id);
+            .HasForeignKey(c => c.UserId);
 
             modelBuilder.Entity<JournalCategory>()
             .HasKey(jc => new { jc.JournalID, jc.CategoryID });
