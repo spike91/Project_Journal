@@ -47,6 +47,10 @@
         </a>
     </div>
 
+    <div>
+        @await Component.InvokeAsync("JournalList", new { maxPriority = 4, isDone = true})
+    </div>
+
 
 
 </div>

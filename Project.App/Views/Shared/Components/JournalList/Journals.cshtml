@@ -1,0 +1,36 @@
+﻿@using Project.App.ViewModels
+@using Project.Entities
+@model IEnumerable<Concretejournal>
+@addTagHelper "*, Project.App"
+
+<h2 style="text-align:center">Latest stock</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Number
+        </th>
+        <th>
+            Company
+        </th>
+        <th>
+            Language
+        </th>
+        <th>
+            Categories
+        </th>
+    </tr>
+    @foreach (Concretejournal j in Model)
+    {
+        string categories = "";
+        j.Journalarticles.ToList().ForEach(x => {
+        x.JournalarticleSubcategories.ToList().ForEach( y => categories += y.Subcategory.Name+ ", ");
+    });
+    categories.Trim();
+    categories = categories == "" ? categories : categories.Remove(categories.Count() - 2);
+        <tr><td>@j.Journal.Title</td><td>@j.Number</td><td>@j.Journal.PublishingCompany.Name</td><td>@j.Journal.Language</td><td>@categories</td></tr>
+    }
+</table>

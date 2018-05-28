@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.App.ViewModels;
+using Project.App.ViewModels.JournalModels;
 using Project.DataBase;
 using Project.Entities;
 using System;
@@ -25,5 +26,6 @@ namespace Project.App.ViewComponents
             List<Category> list = db.Categories.Include(c => c.SubcategoryCategories).ThenInclude(sc => sc.Subcategory).ToList();
             return View(new MenuViewModel { Categories = list });
         }
+        
     }
 }
