@@ -17,7 +17,9 @@ namespace Project.App.Controllers
 {
     public class HomeController : Controller
     {
+
         Context db;
+
         public HomeController(Context context)
         {
             this.db = context;
