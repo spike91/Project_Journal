@@ -30,15 +30,15 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Journal</a>
             </div>
 
-            <div class="navbar-collapse collapse nav navbar-nav">
+            <div class="navbar-collapse collapse nav navbar-nav" id="primary-navigation">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Item 3.1</a></li>
+                            <li><a href="#">Item 2</a></li>
 
                             <li class="dropdown-submenu">
-                                <a href="#">Item 3 </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Item 3</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Item 3.1</a></li>
                                     <li><a href="#">Item 3.2</a></li>
@@ -47,9 +47,9 @@
                                 </ul>
                             </li>
 
-                            <li><a href="#">Item 3.2</a></li>
-                            <li><a href="#">Item 3.3</a></li>
-                            <li><a href="#">Item 3.4</a></li>
+                            <li><a href="#">Item 4</a></li>
+                            <li><a href="#">Item 5</a></li>
+                            <li><a href="#">Item 6</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -61,16 +61,13 @@
                     </form>
                 </div>
 
-
-
                 @*<form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>*@
-
                 <!-- Когда будет авторизован, добавится -->
                 @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-                { 
+                {
                     <ul class="nav navbar-nav">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings<b class="caret"></b></a>
@@ -87,11 +84,11 @@
                     </ul>
                 }
 
-                    @*<ul class="nav navbar-nav">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-            </ul>*@
+                @*<ul class="nav navbar-nav">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+        </ul>*@
             </div>
 
 
