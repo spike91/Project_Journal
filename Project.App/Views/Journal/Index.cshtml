@@ -1,0 +1,72 @@
+﻿@using Project.App.ViewModels
+@using Project.Entities
+
+@model Project.App.ViewModels.JournalModels.IndexViewModel
+@addTagHelper "*, Project.App"
+@{
+    ViewData["Title"] = "Journals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Journals</h2>
+
+<form method="get">
+    <div class="form-group form-inline">
+        <label class="control-label">Title: </label>
+        @Html.TextBox("name", Model.FilterViewModel.SelectedTitle, htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Company: </label>
+        @Html.DropDownList("company", Model.FilterViewModel.Companies as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+
+        <label class="control-label">Category: </label>
+        @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+
+        <input type="submit" value="Filter" class="btn btn-default" />
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index"
+               asp-route-sortOrder="@(Model.SortViewModel.TitleSort)"
+               asp-route-title="@(Model.FilterViewModel.SelectedTitle)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Title</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)"
+               asp-route-title="@(Model.FilterViewModel.SelectedTitle)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Company</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.LanguageSort)"
+               asp-route-title="@(Model.FilterViewModel.SelectedTitle)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Language</a>
+        </th>
+        <th>
+            Categories
+        </th>
+        <th>
+            Site
+        </th>
+    </tr>
+    @foreach (Journal j in Model.Journals)
+    {
+        string categories = "";
+        j.JournalCategories.ToList().ForEach(x => categories += x.Category.CategoryName+", ");
+        categories.Trim();
+        categories = categories.Remove(categories.Count()-2);
+        <tr><td>@j.Title</td><td>@j.PublishingCompany.Name</td><td>@j.Language</td><td>@categories</td><td>@j.Site</td></tr>
+    }
+</table>
+
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-title="@(Model.FilterViewModel.SelectedTitle)"
+           page-url-company="@(Model.FilterViewModel.SelectedCompany)"
+           page-url-category="@(Model.FilterViewModel.SelectedCategory)"
+           page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
