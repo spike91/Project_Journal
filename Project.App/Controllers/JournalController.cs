@@ -23,11 +23,12 @@ namespace Project.App.Controllers
 
         public async Task<IActionResult> ConcreteJournalInfo(int id)
         {
-            Concretejournal journal = await db.Concretejournals.Include(c => c.Journal).Where(c => c.ConcretejournalID == id).FirstOrDefaultAsync();
+            Concretejournal journal = await db.Concretejournals.Include(c => c.Journal).ThenInclude(j => j.PublishingCompany).Where(c => c.ConcretejournalID == id).FirstOrDefaultAsync();
 
             InfoViewModel viewModel = new InfoViewModel()
             {
                 Journal = journal,
+                Company = journal.Journal.PublishingCompany,
                 Articles = await db.Journalarticles.Where(j => j.ConcreteJournalID == id).ToListAsync(),
                 Authors = await db.Persons.Where(p => p.PersonJournalarticles.Where(x => x.Journalarticle.ConcreteJournalID == id).Count() >= 1).ToListAsync(),
                 Comments = await db.Comments.Where(c => c.ConcretejournalComments.Where(cc => cc.ConcretejournalID == id).Count() >= 1).ToListAsync()
