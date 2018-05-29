@@ -21,6 +21,20 @@ namespace Project.App.Controllers
             this.db = context;
         }
 
+        public async Task<IActionResult> ConcreteJournalInfo(int id)
+        {
+            Concretejournal journal = await db.Concretejournals.Include(c => c.Journal).Where(c => c.ConcretejournalID == id).FirstOrDefaultAsync();
+
+            InfoViewModel viewModel = new InfoViewModel()
+            {
+                Journal = journal,
+                Articles = await db.Journalarticles.Where(j => j.ConcreteJournalID == id).ToListAsync(),
+                Authors = await db.Persons.Where(p => p.PersonJournalarticles.Where(x => x.Journalarticle.ConcreteJournalID == id).Count() >= 1).ToListAsync(),
+                Comments = await db.Comments.Where(c => c.ConcretejournalComments.Where(cc => cc.ConcretejournalID == id).Count() >= 1).ToListAsync()
+            };
+            return View(viewModel);
+        }
+
         public async Task<IActionResult> Index(int? category, int? company, string name, int page = 1,
             ViewModels.JournalModels.SortState sortOrder = ViewModels.JournalModels.SortState.TitleAsc)
         {        

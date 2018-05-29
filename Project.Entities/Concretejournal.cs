@@ -8,6 +8,8 @@ namespace Project.Entities
     {
         public int ConcretejournalID { get; set; }
         public string Number { get; set; }
+        public string Description { get; set; }
+        public string Pages { get; set; }
         public string Image { get; set; } = null;
         public DateTime Date { get; set; }
 

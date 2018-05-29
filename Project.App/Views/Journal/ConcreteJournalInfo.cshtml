@@ -1,0 +1,80 @@
+﻿@using Project.Entities
+@model Project.App.ViewModels.ConcreteJournalModels.InfoViewModel
+
+@{
+    ViewData["Title"] = "ConcreteJournalInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ConcreteJournalInfo</h2>
+
+<div class="container content">
+    <div class="row content">
+        <div class="col">
+            1 of 2
+        </div>
+        <div class="col">
+            2 of 2
+        </div>
+    </div>
+    <div class="row content">
+        <div class="col">
+            1 of 3
+        </div>
+        <div class="col">
+            2 of 3
+        </div>
+        <div class="col">
+            3 of 3
+        </div>
+    </div>
+</div>
+
+@*<div class="container">
+    <div class="row">
+        <div class="col-">
+            <img src="~/images/Journalcartoon.jpg"
+                 asp-append-version="true" />
+        </div>
+        <div class="col-">
+            <div class="container">
+                <div class="row">
+                    @Model.Journal.Journal.Title Nr.@Model.Journal.Number
+                </div>
+                <div class="row">
+                    @Model.Journal.Description
+                </div>
+                <div class="row">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">@Model.Journal.Date</li>
+                        <li class="list-group-item">@Model.Journal.Pages</li>
+                        <li class="list-group-item">
+                            @foreach (var item in Model.Articles)
+                            {
+                                <h6>@item.Title</h6><h6>@item.Page</h6>
+                            }
+                        </li>
+                    </ul>
+                    @*<table>
+                    <tr>
+                        <td>
+                            @Model.Journal.Date
+                        </td>
+                        <td>
+                            @Model.Journal.Pages
+                        </td>
+                        <td>
+                            @foreach (var item in Model.Journal.Journalarticles)
+                            {
+                                <div>item.Title</div>
+                            }
+                        </td>
+                        <td></td>
+                    </tr>
+                    }
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@

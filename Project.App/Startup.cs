@@ -32,6 +32,9 @@ namespace Project.App
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //UseSqlServer(@"Server=vct.vk;Database=db_Gavrilov;User Id=t154328;Password=t154328;");
+            //UseSqlServer(@"Server=www.vk.edu.ee;Database=db_Gavrilov;User Id=t154328;Password=t154328;");
+
             services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalizationConnection")));
 
             services.AddTransient<IStringLocalizer, AppStringLocalizer>();
