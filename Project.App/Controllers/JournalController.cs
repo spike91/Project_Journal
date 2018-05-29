@@ -87,13 +87,15 @@ namespace Project.App.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> ConcreteJournals(int? category ,int? subCategory, int? journal, string name, int page = 1,
-            Project.App.ViewModels.ConcreteJournalModels.SortState sortOrder = Project.App.ViewModels.ConcreteJournalModels.SortState.TitleAsc)
+        public async Task<IActionResult> ConcreteJournals(int? category, int? subCategory, int? journal, string search, int page = 1,
+            Project.App.ViewModels.ConcreteJournalModels.SortState sortOrder = Project.App.ViewModels.ConcreteJournalModels.SortState.TitleAsc, string type = "menu")
         {
             int pageSize = 5;
 
             //фильтрация
-            IQueryable<Concretejournal> journals = db.Concretejournals.Include(x => x.Journal).ThenInclude(y => y.PublishingCompany).Include(x => x.Journal).ThenInclude(y => y.JournalCategories).Include(x => x.Journalarticles).ThenInclude(x => x.JournalarticleSubcategories).ThenInclude(z => z.Subcategory);
+            IQueryable<Concretejournal> journals = db.Concretejournals.Include(x => x.Journal).ThenInclude(y => y.PublishingCompany).Include(x => x.Journal).ThenInclude(y => y.JournalCategories)
+                .Include(x => x.Journalarticles).ThenInclude(x => x.JournalarticleSubcategories).ThenInclude(z => z.Subcategory)
+                .Include(x => x.Journalarticles).ThenInclude(x => x.Keywords);
 
             if (journal != null && journal != 0)
             {
@@ -107,9 +109,19 @@ namespace Project.App.Controllers
             {
                 journals = journals.Where(p => p.Journalarticles.Where(x => x.JournalarticleSubcategories.Where(z => z.Subcategory.SubcategoryID == subCategory).Count() >= 1).Count() >= 1);
             }
-            if (!String.IsNullOrEmpty(name))
+            if (!String.IsNullOrEmpty(search))
             {
-                journals = journals.Where(p => (p.Journal.Title + " " + p.Number).Contains(name));
+                journals = journals.Where(p => p.Journalarticles
+                .Where(k => k.Keywords
+                .Where(z => z.Word.Name.Contains(search)
+                        ).Count() >= 1 
+                || k.PersonJournalarticles
+                .Where(per => (per.Person.FirstName+per.Person.LastName)
+                .Contains(search)
+                        ).Count() >= 1
+                                        ).Count() >= 1
+                || (p.Journal.Title + " " + p.Number).Contains(search)
+                );
             }
 
             // сортировка
@@ -148,9 +160,10 @@ namespace Project.App.Controllers
             // формируем модель представления
             ViewModels.ConcreteJournalModels.IndexViewModel viewModel = new ViewModels.ConcreteJournalModels.IndexViewModel
             {
+                Type = type,
                 PageViewModel = new PageViewModel(count, page, pageSize),
                 SortViewModel = new ViewModels.ConcreteJournalModels.SortViewModel(sortOrder),
-                FilterViewModel = new ViewModels.ConcreteJournalModels.FilterViewModel(db.Subcategories.ToList(), subCategory, db.Journals.ToList(), journal, name),
+                FilterViewModel = new ViewModels.ConcreteJournalModels.FilterViewModel(db.Subcategories.ToList(), subCategory, db.Journals.ToList(), journal, search),
                 Journals = items
             };
 

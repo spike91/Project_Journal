@@ -9,7 +9,7 @@ namespace Project.App.ViewModels.ConcreteJournalModels
 {
     public class FilterViewModel
     {
-        public FilterViewModel(List<Subcategory> categories, int? subCategory, List<Journal> journals, int? journal, string title)
+        public FilterViewModel(List<Subcategory> categories, int? subCategory, List<Journal> journals, int? journal, string search)
         {
             categories.Insert(0, new Subcategory { Name = "Все",  SubcategoryID = 0 });
             Categories = new SelectList(categories, "SubcategoryID", "Name", subCategory);
@@ -19,12 +19,12 @@ namespace Project.App.ViewModels.ConcreteJournalModels
             Journals = new SelectList(journals, "JournalID", "Title", journal);
             SelectedJournal = journal;
 
-            SelectedTitle = title;
+            SelectedSearch = search;
         }
         public SelectList Categories { get; private set; } 
         public int? SelectedCategory { get; private set; }
         public SelectList Journals { get; private set; }
         public int? SelectedJournal { get; private set; }
-        public string SelectedTitle { get; private set; }    
+        public string SelectedSearch { get; private set; }    
     }
 }
