@@ -29,6 +29,7 @@ namespace Project.App.Controllers
             {
                 Journal = journal,
                 Company = journal.Journal.PublishingCompany,
+                Categories = await db.Subcategories.Where(s => s.SubcategoryCategories.Where(sc => sc.Category.JournalCategories.Where(j => j.Journal.Concretejournals.Where(cj => cj.ConcretejournalID == id).Count() >= 1).Count() >= 1).Count() >= 1).ToListAsync(),
                 Articles = await db.Journalarticles.Where(j => j.ConcreteJournalID == id).ToListAsync(),
                 Authors = await db.Persons.Where(p => p.PersonJournalarticles.Where(x => x.Journalarticle.ConcreteJournalID == id).Count() >= 1).ToListAsync(),
                 Comments = await db.Comments.Where(c => c.ConcretejournalComments.Where(cc => cc.ConcretejournalID == id).Count() >= 1).ToListAsync()
@@ -39,7 +40,7 @@ namespace Project.App.Controllers
         public async Task<IActionResult> Index(int? category, int? company, string name, int page = 1,
             ViewModels.JournalModels.SortState sortOrder = ViewModels.JournalModels.SortState.TitleAsc)
         {        
-            int pageSize = 5;
+            int pageSize = 6;
 
             //фильтрация
             IQueryable<Journal> journals = db.Journals.Include(x => x.JournalCategories).Include(x => x.PublishingCompany);
@@ -105,7 +106,7 @@ namespace Project.App.Controllers
         public async Task<IActionResult> ConcreteJournals(int? category, int? subCategory, int? journal, string search, int page = 1,
             Project.App.ViewModels.ConcreteJournalModels.SortState sortOrder = Project.App.ViewModels.ConcreteJournalModels.SortState.TitleAsc, string type = "menu")
         {
-            int pageSize = 5;
+            int pageSize = 6;
 
             //фильтрация
             IQueryable<Concretejournal> journals = db.Concretejournals.Include(x => x.Journal).ThenInclude(y => y.PublishingCompany).Include(x => x.Journal).ThenInclude(y => y.JournalCategories)

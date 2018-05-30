@@ -2,21 +2,18 @@
 @using Project.Entities
 @model Project.App.ViewModels.ConcreteJournalModels.IndexViewModel
 @addTagHelper "*, Project.App"
-
 @{
     ViewData["Title"] = "Journals";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @if (Model.Type.Equals("search"))
 {
-<h3 style="text-align: center; margin-bottom:50px">Searching result: @Model.Journals.Count()</h3>
+    <h3 style="text-align: center; margin-bottom:50px">Searching result: @Model.Journals.Count()</h3>
 }
 else
 {
-<h3 style="text-align: center;margin-bottom:50px">Journals list</h3>
+    <h3 style="text-align: center;margin-bottom:50px">Journals list</h3>
 }
-</&>
 
 <form method="get">
     <div class="form-group form-inline">
@@ -52,29 +49,32 @@ else
                asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
                asp-route-journal="@(Model.FilterViewModel.SelectedJournal)">Date</a>
         </th>
-        <th>
-            Categories
-        </th>
     </tr>
-    @foreach (Concretejournal j in Model.Journals)
-    {
-        string categories = "";
-        j.Journalarticles.ToList().ForEach(x =>
-        {
-            x.JournalarticleSubcategories.ToList().ForEach(y =>
-            {
-                if (!categories.Contains(y.Subcategory.Name)) categories += y.Subcategory.Name + ", ";
-            }
-            );
-        });
-        categories.Trim();
-        categories = categories == "" ? categories : categories.Remove(categories.Count() - 2);
-        <tr><td>@j.Journal.Title Nr.@j.Number</td><td>@j.Journal.Title</td><td>@j.Date</td><td>@categories</td></tr>
-    }
 </table>
+<div class="row">
+    @foreach (var item in Model.Journals)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="@item.Image" alt="...">
+                <div class="caption">
+                    <h3>@item.Journal.Title Nr.@item.Number</h3>
+                    <p>@item.Date.ToShortDateString()</p>
+                    <p>
+                        <a asp-controller="Journal" asp-action="ConcreteJournalInfo" asp-route-id="@item.ConcretejournalID" class="btn btn-primary" role="button">Details</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <a asp-controller="Journal" asp-action="ConcreteJournalEdit" asp-route-id="@item.ConcretejournalID" class="btn btn-default" role="button">Edit</a>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 <page-link page-model="Model.PageViewModel" page-action="ConcreteJournals"
            page-url-search="@(Model.FilterViewModel.SelectedSearch)"
            page-url-journal="@(Model.FilterViewModel.SelectedJournal)"
            page-url-category="@(Model.FilterViewModel.SelectedCategory)"
            page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
-

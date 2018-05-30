@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.App.Models;
 using Project.App.ViewModels;
+using Project.App.ViewModels.ConcreteJournalModels;
 using Project.DataBase;
 using Project.Entities;
 
@@ -26,7 +27,10 @@ namespace Project.App.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IndexViewModel viewModel = new IndexViewModel() {
+                Journals = db.Concretejournals.Include(c => c.Journal).OrderBy(c=>c.Date).Take(6).ToList()
+            };
+            return View(viewModel);
         }
 
         public IActionResult About()
@@ -49,6 +53,16 @@ namespace Project.App.Controllers
         }
 
         public IActionResult AddJournal()
+        {
+            return View();
+        }
+
+        public IActionResult AddConcreteJournal()
+        {
+            return View();
+        }
+
+        public IActionResult EditConcreteJournal()
         {
             return View();
         }
