@@ -1,4 +1,6 @@
 ﻿@using Project.Entities
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model Project.App.ViewModels.ConcreteJournalModels.InfoViewModel
 @{
     ViewData["Title"] = "ConcreteJournalInfo";
@@ -8,7 +10,7 @@
     <div class="row">
         <div class="col-md-4 offset-md-0">
             <p style="text-align:center;margin-top:50px">
-                <img src="~/images/Journalcartoon.jpg"
+                <img src=@Model.Journal.Image
                      asp-append-version="true" />
             </p>
         </div>
@@ -33,7 +35,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        Date:
+                                        @Localizer["Date"]:
                                     </td>
                                     <td>
                                         @Model.Journal.Date
@@ -41,7 +43,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Page numbers:
+                                        @Localizer["Page numbers"]:
                                     </td>
                                     <td>
                                         @Model.Journal.Pages
@@ -49,7 +51,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Published by:
+                                        @Localizer["Published by"]:
                                     </td>
                                     <td>
                                         @Model.Company.Name
@@ -57,7 +59,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Categories:
+                                        @Localizer["Categories"]:
                                     </td>
                                     <td>
                                         @foreach (Subcategory item in Model.Categories)
@@ -68,7 +70,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        Authors:
+                                        @Localizer["Authors"]:
                                     </td>
                                     <td>
                                         @*@for (int i = 0; i < 5; i++)
@@ -77,13 +79,13 @@
                                             }*@
                                         @foreach (var item in Model.Authors)
                                         {
-                                            <div>item.FirstName item.LastName</div>
+                                            <div>@item.FirstName @item.LastName</div>
                                         }
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        Articles:
+                                        @Localizer["Articles"]:
                                     </td>
                                     <td>
                                         @*@for (int i = 0; i < 5; i++)
@@ -92,7 +94,7 @@
                                             }*@
                                         @foreach (var item in Model.Articles)
                                         {
-                                            <div>item.Title</div>
+                                            <div>@item.Title</div>
                                         }
                                     </td>
                                 </tr>

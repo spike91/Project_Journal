@@ -1,26 +1,26 @@
 ﻿@using Project.Entities
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model Project.App.ViewModels.MenuViewModel
-
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
 @foreach (Category category in Model.Categories)
 {
     if (category.SubcategoryCategories.Count != 0)
     {
         <li class="dropdown-submenu">
-            <a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-category="@category.CategoryID" >@category.CategoryName</a>
+            <a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-category="@category.CategoryID">@Localizer[@category.CategoryName]</a>
             <ul class="dropdown-menu">
                 @foreach (SubcategoryCategory sub in category.SubcategoryCategories)
                 {
-                    <li><a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-subCategory="@sub.Subcategory.SubcategoryID">@sub.Subcategory.Name</a></li>
+                    <li><a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-subCategory="@sub.Subcategory.SubcategoryID">@Localizer[@sub.Subcategory.Name]</a></li>
                 }
             </ul>
         </li>
     }
     else
     {
-        <li><a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-category="@category.CategoryID">@category.CategoryName</a></li>
+        <li><a asp-controller="Journal" asp-action="ConcreteJournals" asp-route-category="@category.CategoryID">@Localizer[@category.CategoryName]</a></li>
     }
 }

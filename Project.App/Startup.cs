@@ -35,10 +35,10 @@ namespace Project.App
             //UseSqlServer(@"Server=vct.vk;Database=db_Gavrilov;User Id=t154328;Password=t154328;");
             //UseSqlServer(@"Server=www.vk.edu.ee;Database=db_Gavrilov;User Id=t154328;Password=t154328;");
 
-            services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalizationConnection")));
+            services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CollegeConnection")));
 
             services.AddTransient<IStringLocalizer, AppStringLocalizer>();
-            services.AddSingleton<IStringLocalizerFactory>(new AppStringLocalizerFactory(Configuration.GetConnectionString("LocalizationConnection")));
+            services.AddSingleton<IStringLocalizerFactory>(new AppStringLocalizerFactory(Configuration.GetConnectionString("CollegeConnection")));
 
             services.AddIdentity<User, IdentityRole>(opts =>
             {

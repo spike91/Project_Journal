@@ -9,16 +9,19 @@ using Project.App.ViewModels.JournalModels;
 using Project.App.ViewModels.ConcreteJournalModels;
 using Project.DataBase;
 using Project.Entities;
+using Microsoft.Extensions.Localization;
 
 namespace Project.App.Controllers
 {
     public class JournalController : Controller
     {
         Context db;
+        private readonly IStringLocalizer _localizer;
 
-        public JournalController(Context context)
+        public JournalController(Context context, IStringLocalizer localizer)
         {
             this.db = context;
+            this._localizer = localizer;
         }
 
         public async Task<IActionResult> ConcreteJournalInfo(int id)
@@ -179,7 +182,7 @@ namespace Project.App.Controllers
                 Type = type,
                 PageViewModel = new PageViewModel(count, page, pageSize),
                 SortViewModel = new ViewModels.ConcreteJournalModels.SortViewModel(sortOrder),
-                FilterViewModel = new ViewModels.ConcreteJournalModels.FilterViewModel(db.Subcategories.ToList(), subCategory, db.Journals.ToList(), journal, search),
+                FilterViewModel = new ViewModels.ConcreteJournalModels.FilterViewModel(db.Subcategories.ToList(), subCategory, db.Journals.ToList(), journal, search,_localizer),
                 Journals = items
             };
 
