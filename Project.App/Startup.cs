@@ -30,10 +30,7 @@ namespace Project.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            //UseSqlServer(@"Server=vct.vk;Database=db_Gavrilov;User Id=t154328;Password=t154328;");
-            //UseSqlServer(@"Server=www.vk.edu.ee;Database=db_Gavrilov;User Id=t154328;Password=t154328;");
+                options.UseSqlServer(Configuration.GetConnectionString("CollegeConnection")));
 
             services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CollegeConnection")));
 
@@ -46,7 +43,6 @@ namespace Project.App
             })
                 .AddEntityFrameworkStores<Context>();
 
-            //services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>

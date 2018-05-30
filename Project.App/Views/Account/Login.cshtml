@@ -1,4 +1,6 @@
-﻿@model Project.App.ViewModels.LoginViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Project.App.ViewModels.LoginViewModel
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,16 +16,16 @@
         <span asp-validation-for="Email"></span>
     </div>
     <div>
-        <label asp-for="Password"></label><br />
+        <label>@Localizer["Password"]</label><br />
         <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
     <div>
-        <label asp-for="RememberMe"></label><br />
+        <label>@Localizer["Remember"]?</label><br />
         <input asp-for="RememberMe" />
     </div>
     <div>
-        <input type="submit" value="Login" />
+        <input type="submit" value=@Localizer["Login"] />
     </div>
 </form>
 
