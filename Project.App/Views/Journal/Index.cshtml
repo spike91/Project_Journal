@@ -32,19 +32,19 @@
         <th>
             <a asp-action="Index"
                asp-route-sortOrder="@(Model.SortViewModel.TitleSort)"
-               asp-route-title="@(Model.FilterViewModel.SelectedTitle)"
+               asp-route-name="@(Model.FilterViewModel.SelectedTitle)"
                asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
                asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Title</a>
         </th>
         <th>
             <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CompanySort)"
-               asp-route-title="@(Model.FilterViewModel.SelectedTitle)"
+               asp-route-name="@(Model.FilterViewModel.SelectedTitle)"
                asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
                asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Company</a>
         </th>
         <th>
             <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.LanguageSort)"
-               asp-route-title="@(Model.FilterViewModel.SelectedTitle)"
+               asp-route-name="@(Model.FilterViewModel.SelectedTitle)"
                asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
                asp-route-company="@(Model.FilterViewModel.SelectedCompany)">Language</a>
         </th>
@@ -66,7 +66,7 @@
 </table>
 
 <page-link page-model="Model.PageViewModel" page-action="Index"
-           page-url-title="@(Model.FilterViewModel.SelectedTitle)"
+           page-url-name="@(Model.FilterViewModel.SelectedTitle)"
            page-url-company="@(Model.FilterViewModel.SelectedCompany)"
            page-url-category="@(Model.FilterViewModel.SelectedCategory)"
            page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>

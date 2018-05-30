@@ -11,9 +11,10 @@ using System;
 namespace Project.DataBase.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180528195127_AddImageToJournal")]
+    partial class AddImageToJournal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,15 +168,11 @@ namespace Project.DataBase.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("Description");
-
                     b.Property<string>("Image");
 
                     b.Property<int>("JournalID");
 
                     b.Property<string>("Number");
-
-                    b.Property<string>("Pages");
 
                     b.HasKey("ConcretejournalID");
 

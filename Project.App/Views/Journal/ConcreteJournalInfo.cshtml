@@ -1,0 +1,110 @@
+﻿@using Project.Entities
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Project.App.ViewModels.ConcreteJournalModels.InfoViewModel
+@{
+    ViewData["Title"] = "ConcreteJournalInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-0">
+            <p style="text-align:center;margin-top:50px">
+                <img src=@Model.Journal.Image
+                     asp-append-version="true" />
+            </p>
+        </div>
+        <div class="col-md-8 offset-md-0">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 offset-md-0">
+                        <h3>@Model.Journal.Journal.Title Nr.@Model.Journal.Number</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 offset-md-0">
+                        <h4>
+                            @Model.Journal.Description
+                        </h4>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 offset-md-0">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        @Localizer["Date"]:
+                                    </td>
+                                    <td>
+                                        @Model.Journal.Date
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Localizer["Page numbers"]:
+                                    </td>
+                                    <td>
+                                        @Model.Journal.Pages
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Localizer["Published by"]:
+                                    </td>
+                                    <td>
+                                        @Model.Company.Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Localizer["Categories"]:
+                                    </td>
+                                    <td>
+                                        @foreach (Subcategory item in Model.Categories)
+                                        {
+                                            <div>@item.Name</div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Localizer["Authors"]:
+                                    </td>
+                                    <td>
+                                        @*@for (int i = 0; i < 5; i++)
+                                            {
+                                                <div>Some title</div>
+                                            }*@
+                                        @foreach (var item in Model.Authors)
+                                        {
+                                            <div>@item.FirstName @item.LastName</div>
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Localizer["Articles"]:
+                                    </td>
+                                    <td>
+                                        @*@for (int i = 0; i < 5; i++)
+                                            {
+                                                <div>Some title</div>
+                                            }*@
+                                        @foreach (var item in Model.Articles)
+                                        {
+                                            <div>@item.Title</div>
+                                        }
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

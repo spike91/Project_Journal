@@ -11,9 +11,10 @@ using System;
 namespace Project.DataBase.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20180529195910_ConcreteJournalAddColumnDescription")]
+    partial class ConcreteJournalAddColumnDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,8 +175,6 @@ namespace Project.DataBase.Migrations
                     b.Property<int>("JournalID");
 
                     b.Property<string>("Number");
-
-                    b.Property<string>("Pages");
 
                     b.HasKey("ConcretejournalID");
 

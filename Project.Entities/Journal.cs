@@ -11,6 +11,7 @@ namespace Project.Entities
         public string Language { get; set; }
         public int Pages { get; set; }
         public string Site { get; set; }
+        public string Image { get; set; } = null;
 
         public int PublishingCompanyID { get; set; }
         public Publishingcompany PublishingCompany { get; set; }

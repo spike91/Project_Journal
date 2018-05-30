@@ -30,12 +30,12 @@ namespace Project.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("CollegeConnection")));
 
-            services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalizationConnection")));
+            services.AddDbContext<LocalizationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("CollegeConnection")));
 
             services.AddTransient<IStringLocalizer, AppStringLocalizer>();
-            services.AddSingleton<IStringLocalizerFactory>(new AppStringLocalizerFactory(Configuration.GetConnectionString("LocalizationConnection")));
+            services.AddSingleton<IStringLocalizerFactory>(new AppStringLocalizerFactory(Configuration.GetConnectionString("CollegeConnection")));
 
             services.AddIdentity<User, IdentityRole>(opts =>
             {
@@ -43,7 +43,6 @@ namespace Project.App
             })
                 .AddEntityFrameworkStores<Context>();
 
-            //services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>

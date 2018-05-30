@@ -1,29 +1,33 @@
-﻿@model Project.App.ViewModels.RegisterViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model Project.App.ViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New user register</h2>
+<h2>Register</h2>
 <form method="post" asp-controller="Account" asp-action="Register">
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Email"></label><br />
         <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
+        <span asp-validation-for="Email"></span>    
     </div>
     <div>
-        <label asp-for="Password"></label><br />
+        <label>@Localizer["Password"]</label><br />
         <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
     <div>
-        <label asp-for="PasswordConfirm"></label><br />
+        <label >@Localizer["PasswordConfirm"]</label><br />
         <input asp-for="PasswordConfirm" />
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Register" />
+        <br />
+        <input type="submit" value=@Localizer["Register"] />
     </div>
 </form>
 

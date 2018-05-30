@@ -1,0 +1,83 @@
+﻿@using Project.App.ViewModels
+@using Project.Entities
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model Project.App.ViewModels.ConcreteJournalModels.IndexViewModel
+@addTagHelper "*, Project.App"
+@{
+    ViewData["Title"] = "Journals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Type.Equals("search"))
+{
+<h3 style="text-align: center; margin-bottom:50px">@Localizer["Searching result"]: @Model.Journals.Count()</h3>
+}
+else
+{
+    <h3 style="text-align: center;margin-bottom:50px">@Localizer["Journals list"]</h3>
+}
+
+<form method="get">
+    <div class="form-group form-inline">
+        <label class="control-label">@Localizer["Search"]: </label>
+        @Html.TextBox("search", Model.FilterViewModel.SelectedSearch, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">@Localizer["Journal"]: </label>
+        @Html.DropDownList("journal", Model.FilterViewModel.Journals as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">@Localizer["Category"]: </label>
+        @Html.DropDownList("category", Model.FilterViewModel.Categories as SelectList,
+                htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value=@Localizer["Filter"] class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="ConcreteJournals"
+               asp-route-sortOrder="@(Model.SortViewModel.TitleSort)"
+               asp-route-search="@(Model.FilterViewModel.SelectedSearch)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-journal="@(Model.FilterViewModel.SelectedJournal)">Title</a>
+        </th>
+        <th>
+            <a asp-action="ConcreteJournals" asp-route-sortOrder="@(Model.SortViewModel.JournalSort)"
+               asp-route-search="@(Model.FilterViewModel.SelectedSearch)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-journal="@(Model.FilterViewModel.SelectedJournal)">Journal</a>
+        </th>
+        <th>
+            <a asp-action="ConcreteJournals" asp-route-sortOrder="@(Model.SortViewModel.DateSort)"
+               asp-route-search="@(Model.FilterViewModel.SelectedSearch)"
+               asp-route-category="@(Model.FilterViewModel.SelectedCategory)"
+               asp-route-journal="@(Model.FilterViewModel.SelectedJournal)">Date</a>
+        </th>
+    </tr>
+</table>
+<div class="row">
+    @foreach (var item in Model.Journals)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src=@item.Image
+                     asp-append-version="true" />
+                <div class="caption">
+                    <h3>@item.Journal.Title Nr.@item.Number</h3>
+                    <p>@item.Date.ToShortDateString()</p>
+                    <p>
+                        <a asp-controller="Journal" asp-action="ConcreteJournalInfo" asp-route-id="@item.ConcretejournalID" class="btn btn-primary" role="button">@Localizer["Details"]</a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <a asp-controller="Journal" asp-action="ConcreteJournalEdit" asp-route-id="@item.ConcretejournalID" class="btn btn-default" role="button">Edit</a>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<page-link page-model="Model.PageViewModel" page-action="ConcreteJournals"
+           page-url-search="@(Model.FilterViewModel.SelectedSearch)"
+           page-url-journal="@(Model.FilterViewModel.SelectedJournal)"
+           page-url-category="@(Model.FilterViewModel.SelectedCategory)"
+           page-url-sortorder="@(Model.SortViewModel.Current)"></page-link>
